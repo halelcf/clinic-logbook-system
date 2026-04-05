@@ -1,0 +1,7 @@
+{
+    "name": "plp/clinic-logbook-system",
+    "description": "Clinic Logbook System for PLP",
+    "require": {
+        "php": "^8.0"
+    }
+}
