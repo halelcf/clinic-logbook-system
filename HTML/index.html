@@ -1,60 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PLP ClinicConnect</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLP ClinicConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <div class="logo"></div>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-hospital-user"></i></div>
+            PLPClinicConnect
+        </div>
+        <div class="system-status">
+            <div class="status-line"></div>
+            SYSTEM ACTIVE
+        </div>
+    </header>
 
-    <h1>PLP ClinicConnect</h1>
-    <div class="subtitle">Digital Logbook and Patient Information System</div>
+    <main>
+        <div class="clinic-card">
+            <h1>PLP ClinicConnect</h1>
+            <p>Select your access point to begin clinic<br>session</p>
 
-    <hr>
+            <div class="options-container">
+                <a href="visitorregis.html" class="option-btn">
+                    <div class="icon-box icon-primary">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div class="btn-text">
+                        <div class="btn-title">Visitor / Patient Registration</div>
+                        <div class="btn-subtitle">Record your arrival for assessment and treatment</div>
+                    </div>
+                    <div class="action-icon">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </a>
 
-    <div class="description">
-      Welcome! Please select your role to continue.<br>
-      Visitors can log their clinic visit. Staff can manage patient records and logs.
-    </div>
+                <a href="clinic.html" class="option-btn">
+                    <div class="icon-box icon-secondary">
+                        <i class="fa-solid fa-briefcase-medical"></i>
+                    </div>
+                    <div class="btn-text">
+                        <div class="btn-title">Clinic Staff Portal</div>
+                        <div class="btn-subtitle">Authorized access to logs and patient records</div>
+                    </div>
+                    <div class="action-icon" style="box-shadow: none; background: transparent;">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                </a>
+            </div>
 
-    <div class="buttons">
-      <div>
-        <button class="btn btn-visitor" onclick="selectRole('visitor')">
-          👤 Visitor Log In
-        </button>
-        <div class="note">Students & Guests</div>
-      </div>
+            <div class="card-footer">
+                <div style="display:flex;align-items:center;gap:6px;"><div class="dot"></div> SERVER LIVE</div>
+                <div class="divider"></div>
+                <div style="display:flex;align-items:center;gap:6px;"><i class="fa-solid fa-globe"></i> PLP CAMPUS NETWORK</div>
+            </div>
+        </div>
+    </main>
 
-      <div>
-        <button class="btn btn-staff" onclick="selectRole('staff')">
-          🏥 Staff Login
-        </button>
-        <div class="note">Nurses & Administrators</div>
-      </div>
-    </div>
-
-    <div class="footer">
-      Secure & confidential • Need help? Contact clinic staff
-    </div>
-  </div>
-
-  <script>
-   function selectRole(role) {
-  document.body.style.opacity = "0.6";
-
-  setTimeout(() => {
-    if (role === "visitor") {
-      window.location.href = "visitor-login.html";
-    } else {
-      window.location.href = "staff-login.html";
-    }
-  }, 300);
-}
-  </script>
+    <footer>
+        <div>© 2026 POWERED BY PLPCLINIC</div>
+        <div class="footer-links">
+            <a href="#">PRIVACY</a>
+            <a href="#">TERMS</a>
+            <a href="#">SUPPORT</a>
+        </div>
+    </footer>
 
 </body>
 </html>
