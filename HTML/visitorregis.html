@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Registration — PLP ClinicConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> VISITOR REGISTRATION
+        </a>
+        <div class="system-status">
+            SESSION STATE: ACTIVE <div class="dot"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="clinic-card form-card">
+            <div class="form-header-icon">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <h1>Clinic Visit Logbook</h1>
+            <p>Please provide your details for clinic assessment</p>
+
+            <form id="registrationForm" onsubmit="handleSubmit(event)">
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>FULL NAME</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="fullName" placeholder="e.g. Juan dela Cruz" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>SCHOOL ID NUMBER</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-id-badge"></i>
+                            <input type="text" id="schoolId" placeholder="e.g. 2024-00123" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>CATEGORY</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-users"></i>
+                            <select id="category" required>
+                                <option value="" disabled selected>Select Category</option>
+                                <option value="student">Student</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="visitor">Visitor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>PROGRAM / DEPARTMENT</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <select id="department" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="it">Information Technology</option>
+                                <option value="ba">Business Administration</option>
+                                <option value="ed">Education</option>
+                                <option value="ns">Nursing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>YEAR LEVEL</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <select id="yearLevel" required>
+                                <option value="" disabled selected>Select Year Level</option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>PURPOSE OF VISIT</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-briefcase-medical"></i>
+                            <select id="purpose" required>
+                                <option value="" disabled selected>Select Reason</option>
+                                <option value="checkup">General Checkup</option>
+                                <option value="injury">First Aid / Injury</option>
+                                <option value="meds">Request Medication</option>
+                                <option value="cert">Medical Certificate</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>NOTES / CHIEF COMPLAINT</label>
+                        <div class="input-wrapper textarea-wrapper">
+                            <i class="fa-solid fa-bars-staggered"></i>
+                            <textarea id="notes" rows="3" placeholder="Briefly describe what you're feeling..."></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                        Register Clinic Visit <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button type="reset" class="btn-reset" title="Reset Form">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Validate all selects manually
+            const selects = document.querySelectorAll('#registrationForm select');
+            for (let sel of selects) {
+                if (!sel.value) {
+                    sel.focus();
+                    return;
+                }
+            }
+
+            // Gather form data and pass to confirmation page via sessionStorage
+            const data = {
+                fullName:   document.getElementById('fullName').value,
+                schoolId:   document.getElementById('schoolId').value,
+                department: document.getElementById('department').options[document.getElementById('department').selectedIndex].text,
+                purpose:    document.getElementById('purpose').options[document.getElementById('purpose').selectedIndex].text,
+                refCode:    '#VIS-2026-' + Math.floor(1000 + Math.random() * 9000),
+                time:       formatTime(new Date())
+            };
+
+            sessionStorage.setItem('visitData', JSON.stringify(data));
+            window.location.href = 'confirmation.html';
+        }
+
+        function formatTime(date) {
+            let h = date.getHours();
+            let m = date.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            m = m < 10 ? '0' + m : m;
+            return `${h}:${m} ${ampm}`;
+        }
+    </script>
+
+</body>
+</html>

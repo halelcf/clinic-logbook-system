@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Confirmed — PLP ClinicConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="success-header-btn">
+            <i class="fa-solid fa-address-card"></i> VISIT CONFIRMED
+        </div>
+        <div class="system-status">
+            ENTRY RECORDED <div class="dot"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="clinic-card confirmation-page">
+            <div class="success-icon-large">
+                <i class="fa-regular fa-circle-check"></i>
+            </div>
+
+            <h1>Registration <span>Complete!</span></h1>
+            <p>Your visit has been logged in the system. Please take a seat in the waiting area.</p>
+
+            <div class="info-cards">
+                <div class="info-card">
+                    <i class="fa-solid fa-fingerprint info-card-bg-icon"></i>
+                    <div class="info-card-label">REFERENCE CODE</div>
+                    <div class="info-card-value" id="ref-code">#VIS-2026-0000</div>
+                </div>
+                <div class="info-card light-green">
+                    <i class="fa-regular fa-bell info-card-bg-icon"></i>
+                    <div class="info-card-label">NEXT STEP</div>
+                    <div class="info-card-text">Wait for your name to be called by the nurse</div>
+                </div>
+            </div>
+
+            <div class="confirm-actions">
+                <a href="index.html" class="btn-return" id="returnBtn">
+                    <i class="fa-solid fa-house"></i> Return to Main Screen
+                </a>
+                <button class="btn-print" title="Print Stub" onclick="window.print()">
+                    <i class="fa-solid fa-print"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>PLP CLINIC MANAGEMENT CONSOLE</div>
+        <div class="countdown-pill">
+            <div class="dot"></div> REDIRECTING IN <span id="countdown">15</span> SECONDS
+        </div>
+        <div><i class="fa-regular fa-clock"></i> CURRENT TIME: <span id="current-time">--:-- --</span></div>
+    </footer>
+
+    <script>
+        // Load visit data from sessionStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const raw = sessionStorage.getItem('visitData');
+            if (raw) {
+                const data = JSON.parse(raw);
+                document.getElementById('ref-code').innerText = data.refCode || '#VIS-2026-0000';
+                document.getElementById('current-time').innerText = data.time || formatTime(new Date());
+                sessionStorage.removeItem('visitData');
+            } else {
+                // Fallback if someone lands here directly
+                document.getElementById('ref-code').innerText = '#VIS-2026-' + Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('current-time').innerText = formatTime(new Date());
+            }
+
+            startCountdown();
+        });
+
+        function formatTime(date) {
+            let h = date.getHours();
+            let m = date.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            m = m < 10 ? '0' + m : m;
+            return `${h}:${m} ${ampm}`;
+        }
+
+        function startCountdown() {
+            let timeLeft = 15;
+            const el = document.getElementById('countdown');
+            el.innerText = timeLeft;
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                el.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+
+            // Cancel countdown if user clicks return manually
+            document.getElementById('returnBtn').addEventListener('click', () => clearInterval(timer));
+        }
+    </script>
+
+</body>
+</html>

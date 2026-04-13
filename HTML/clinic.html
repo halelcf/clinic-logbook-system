@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login — PLP ClinicConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"><i class="fa-solid fa-hospital-user"></i></div>
+            PLPClinicConnect
+        </div>
+    </header>
+
+    <main>
+        <div class="clinic-card login-card">
+
+            <div class="login-left">
+                <div>
+                    <div class="login-left-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h1>Nurse's<br>Station</h1>
+                    <p>Please authenticate your clinical credentials to access the management dashboard and patient logs.</p>
+                </div>
+
+                <div>
+                    <div class="security-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <div class="security-label">SECURITY PROTOCOL</div>
+                            <div class="security-value">End-to-End Encryption Active</div>
+                        </div>
+                    </div>
+                    <div class="auth-personnel">
+                        AUTHORIZED PLP PERSONNEL ONLY
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-right">
+                <h2>Welcome Back</h2>
+                <p>Enter your workstation ID and password</p>
+
+                <form id="staffLoginForm" onsubmit="handleLogin(event)">
+                    <div class="input-group" style="margin-bottom: 22px;">
+                        <label>PERSONNEL ID</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" placeholder="e.g. STAFF-0922" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-with-link">
+                            <label>SECURITY KEY</label>
+                            <a href="#" class="reset-link">RESET KEY</a>
+                        </div>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="login-form-actions">
+                        <button type="submit" class="btn-login">
+                            Sign In to System <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        </button>
+                        <a href="index.html" class="btn-cancel" title="Cancel">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div>PLP CLINIC MANAGEMENT CONSOLE</div>
+    </footer>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            alert("Design mockup — staff dashboard coming soon.");
+            document.getElementById('staffLoginForm').reset();
+        }
+    </script>
+
+</body>
+</html>
