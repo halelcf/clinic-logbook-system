@@ -1,0 +1,40 @@
+<?php
+require 'db_connect.php';
+
+// Check if the form was actually submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    // Generate a unique reference code
+    $refCode = "#VIS-2026-" . rand(1000, 9999);
+    
+    // Grab the data typed into the form
+    $fullName = $_POST['fullName'];
+    $schoolId = $_POST['schoolId'];
+    $category = $_POST['category'];
+    $department = $_POST['department'];
+    $yearLevel = $_POST['yearLevel'];
+    $purpose = $_POST['purpose'];
+    $chiefComplaint = $_POST['chiefComplaint'];
+
+    // Prepare the SQL query to insert the data
+    $sql = "INSERT INTO clinic_visits (reference_code, school_id, full_name, category, department, year_level, purpose, chief_complaint) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            
+    $stmt = $conn->prepare($sql);
+    
+    // Bind the form data to the SQL query securely
+    $stmt->bind_param("ssssssss", $refCode, $schoolId, $fullName, $category, $department, $yearLevel, $purpose, $chiefComplaint);
+
+    // Execute the save
+    if ($stmt->execute()) {
+        // If successful, send them to the success page
+        header("Location: confirmation.html");
+        exit();
+    } else {
+        echo "Error saving record: " . $stmt->error;
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
+?>
