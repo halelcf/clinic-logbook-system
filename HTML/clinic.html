@@ -48,12 +48,12 @@
                 <h2>Welcome Back</h2>
                 <p>Enter your workstation ID and password</p>
 
-                <form id="staffLoginForm" onsubmit="handleLogin(event)">
+                <form action="process_login.php" method="POST">
                     <div class="input-group" style="margin-bottom: 22px;">
                         <label>PERSONNEL ID</label>
                         <div class="input-wrapper">
                             <i class="fa-regular fa-user"></i>
-                            <input type="text" placeholder="e.g. STAFF-0922" required>
+                            <input type="text" name="staffId" placeholder="e.g. STAFF-0922" required>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                         </div>
                         <div class="input-wrapper">
                             <i class="fa-solid fa-lock"></i>
-                            <input type="password" placeholder="••••••••" required>
+                            <input type="password" name="securityKey" placeholder="••••••••" required>
                         </div>
                     </div>
 
@@ -86,13 +86,5 @@
         <div>PLP CLINIC MANAGEMENT CONSOLE</div>
     </footer>
 
-    <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            alert("Design mockup — staff dashboard coming soon.");
-            document.getElementById('staffLoginForm').reset();
-        }
-    </script>
-
-</body>
+    </body>
 </html>
